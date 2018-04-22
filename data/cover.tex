@@ -60,48 +60,43 @@
   % edate={December, 2005}
   %
   % 关键词用“英文逗号”分割
-  ckeywords={交互直播, 主播端, 用户体验质量, 移动网络},
-  ekeywords={Personalized Live Video Streaming, Broadcaster, QoE, Mobile Network}
+  ckeywords={交互直播, 主播端, 用户体验质量, 移动网络，自适应码率},
+  ekeywords={Personalized Live Video Streaming, Broadcaster, QoE, Mobile Network, Adaptive Bitrate}
 }
 
 % 定义中英文摘要和关键字
 \begin{cabstract}
-  论文的摘要是对论文研究内容和成果的高度概括。摘要应对论文所研究的问题及其研究目
-  的进行描述，对研究方法和过程进行简单介绍，对研究成果和所得结论进行概括。摘要应
-  具有独立性和自明性，其内容应包含与论文全文同等量的主要信息。使读者即使不阅读全
-  文，通过摘要就能了解论文的总体内容和主要成果。
+移动设备的大量普及以及LTE等通信技术的迅速发展让用户不再满足于单纯的观看视频直播，用户逐渐成为直播内容的贡献者。传统的流媒体直播技术，不能有效地应对无线网络的带宽抖动，也不能满足交互直播端到端时延短以及高交互的性能要求。RTMP协议因为其流式传输的特性以及较低的端到端时延在移动直播中得到了广泛的应用。现有流媒体直播研究侧重于对直播系统架构和用户直播行为规律性的研究，关于优化视频直播传输质量的研究较为稀少。随着移动直播用户量的爆炸式增长，优化直播传输的质量迫在眉睫。
 
-  论文摘要的书写应力求精确、简明。切忌写成对论文书写内容进行提要的形式，尤其要避
-  免“第 1 章……；第 2 章……；……”这种或类似的陈述方式。
+主播端的用户服务质量在交互直播服务中起着至关重要的作用，主播端上传过程中发生的任何延迟和失败都会对所有观看用户产生影响。本文通过测量多个流行商业直播平台的主播端，发现当无线网络的带宽发生抖动时，所有平台的主播端都会观测到长时间的丢帧现象，严重损害了观众的用户体验质量。
 
-  本文介绍清华大学论文模板 \thuthesis{} 的使用方法。本模板符合学校的本科、硕士、
-  博士论文格式要求。
+通过分析开源直播软件的源码发现，丢帧效应产生的主要原因有两点，视频编码带来的帧间依赖问题，以及网络状况不好时视频数据产生速率高于网络容量。为了减少丢帧现象的发生，本文从关键帧间隔，视频帧的丢帧策略和码率选择三个角度分别着手。网络带宽已知条件下最大化数据传输量的模型，从最优化的角度给出了离线最优的丢帧策略，保证了视频帧的解码约束以及带宽容量约束。码率选择方面，本文尝试固定丢帧策略，综合考虑实时码率以及码率切换，丢帧带来的质量损失，去最大化用户体验质量的收益。
 
-  本文的创新点主要有：
-  \begin{itemize}
-    \item 用例子来解释模板的使用方法；
-    \item 用废话来填充无关紧要的部分；
-    \item 一边学习摸索一边编写新代码。
-  \end{itemize}
+为了优化主播端的用户体验质量，我们协同上述三个策略设计了一整套的解决方案：(1) 最优的关键帧间隔选择策略。关键帧间隔选择时综合考虑视频帧间的依赖关系以及视频压缩比，在丢帧效应和视频质量之间寻求一个平衡点；
+(2) 简单且有效的智能丢帧策略。当视频帧队列溢出时选择性的丢弃旧的GoP，用来缓解商业直播平台应用层丢帧的放大效应；
+(3) GoP粒度的码率自适应策略。基于带宽估计值和视频队列数据量之间的差值来选择合适的码率，通过调节系数为队列缓存小的主播端定制化策略。
 
-  关键词是为了文献标引工作、用以表示全文主要内容信息的单词或术语。关键词不超过 5
-  个，每个关键词中间用分号分隔。（模板作者注：关键词分隔符不用考虑，模板会自动处
-  理。英文关键词同理。）
+本文选取了三个点播领域最新的码率自适应算法作为对比算法，在LTE和Wifi网络环境下分别进行了仿真。实验结果表明，本文提出的解决方案在维持相同码率的条件下，大幅度减少了用户的上传失败问题。
 \end{cabstract}
 
 % 如果习惯关键字跟在摘要文字后面，可以用直接命令来设置，如下：
 % \ckeywords{\TeX, \LaTeX, CJK, 模板, 论文}
 
 \begin{eabstract}
-   Ensuring high video quality of experience (QoE) on the
+With the popularization of mobile devices and the rapid development of communication technologies, instead of simply watching live video, users more and more participate in contributing the live streaming. Traditional streaming technology cannot effectively cope with the bandwidth jitter of the wireless network, nor can it meet the requirements of low-latency and high interactive live streaming. Due to the low end-to-end delay, RTMP is widely used in mobile live streaming. Recent researches focus on the system architecture of live streaming and the pattern of users' behavior, studies on optimizing the QoE of live video transmission is rare to find. With a huge number of users, optimizing the QoE of live video is imminent.
+
+Ensuring high video quality of experience (QoE) on the
 broadcaster side is critical for interactive live streaming
 services, because any delay on the broadcaster side can cause
 negative impact on all viewers. Through measurements on
 multiple popular live video streaming platforms, we find that
 they all suffer from broadcaster-side video quality degradation
 caused by unnecessarily persistent video interruptions
-in the presence of transient bandwidth fluctuations. This
-paper takes a holistic stance, and presents GVBR, a suite of
+in the presence of transient bandwidth fluctuations. 
+
+Analyzing the source code of the open source live broadcast software, there are two main reasons for the frame dropping issue, the inter-frame dependency caused by video encoding, and that the video data generation rate is higher than the network capacity when the network is in bad condition. In order to reduce the frame dropping, this paper tries three aspects: key frame interval, frame dropping strategy and video bitrate selection. Assume known the network bandwidth, we try ro maximize the transmitted data under the constraints of frame decodable and the bandwidth capacity, which provides an offline optimal frame dropping strategy. As for the video bitrate, we take the bitrate, rate switch penalty and frame dropping into consideration, use the known frame dropping strategy to maximize the QoE utility.
+
+This paper takes a holistic stance, and presents a suite of
 solutions that optimizes the broadcaster-side QoE through (1)
 a keyframe placement strategy that dynamically trades crossframe
 compression for lowered inter-frame interdependency,
@@ -109,11 +104,8 @@ compression for lowered inter-frame interdependency,
 excessive frame drops observed in many popular streaming
 platforms, and (3) finally, a RTMP-based bitrate adaptation
 strategy customized for video broadcasters who have extremely
-shallow buffer (below one second). We compare
-GVBR with several popular commercial platforms and open
-source baselines in a variety of network conditions, and find
-that GVBR can reduce the frame drops by 50%, and cut video
-interruption incidents by 90%, while achieving comparable
+shallow buffer (below one second). We compare our solution with several state-of-the-art video adaptation algorithms in a variety of network conditions, and find
+that our solution can substantially reduce the frame drops, while achieving comparable
 bitrate.
 \end{eabstract}
 

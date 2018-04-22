@@ -1,44 +1,30 @@
 \chapter{算法性能评估}
-本章节主要讨论了关于之前三个算法性能的评估，包括GOP层面的优化，帧层面的优化，以及最后的GVBR算法。我们在所有的仿真实验中固定帧率为30帧每秒。
+本章节主要评估了前一章节三种策略的性能优化效果，包括减少关键帧间隔，智能丢帧策略GreedyDrop，以及最后的整套方案，GVBR算法。在本章所有的仿真实验中，我们将帧率都设置为30帧每秒。
 
 \section{最佳GOP}
-\ref{sec:design_gop}章节的讨论表明减小关键帧间隔可以降低丢帧。在本节中，我们尝试去具体评估减少关键帧间隔所带来的性能优化。
+\ref{sec:design_gop}章节的初步实验验证表明减小关键帧间隔可以降低丢帧。但减少关键帧间隔实际上是个很棘手的选择，因为关键帧数目的增加可能会导致视频质量的降低。在本节中，我们尝试去具体评估由于减少关键帧间隔所带来的性能变化。
 
-\begin{figure}[H]% use float package if you want it here
-  \centering
-  \includegraphics[width=\textwidth]{eval_IframeInterval_drop}
-  \caption{不同关键帧间隔下的丢帧数}
-  \label{fig:keyframe_drop}
-\end{figure}
-
-\textbf{改变关键帧间隔} OBS软件默认的关键帧间隔是8s，实验中我们把关键帧间隔分别改为4s和1s。每次实验，我们重复主播端推流的过程，使用同一个视频，在时间为0的时候开始上传视频。我们分别在时间为17s，19s，21s和23s的时候断开网络连接，断开时间为2s。丢帧的结果图展示在图~\ref{fig:keyframe_drop}。我们可以看到，对于关键帧相同的实验组来说，网络断开的时间处于一个GOP越早的时间，丢弃的帧数越多。因为GOP中较早的帧会有更多依赖于它的帧。对于默认为8s的关键帧间隔，当断开时间分别是17s，19s，21s和23s，丢帧数分别为238,164,105和48。对比在17s时断开的实验组，我们发现较小的关键帧间隔明显可以减少丢帧数，比如，当关键帧从8s变到4s再变到1s时，丢帧数从238减到102，最后减少到46。然后，23s的实验组，效果并不明显。这是因为23s在三组实验中均接近于GOP的尾部，只有1s的帧依赖于23s的帧。
-
-实验结果表明，通过减少帧之间的依赖性，一个短暂的网络抖动只会丢弃抖动附近较短时间的帧，而不是产生放大效应，丢弃接下来好多秒的帧。
-
-减少关键帧间隔是个很棘手的问题，因为减少可能会导致视频质量的降低。
-
-\textbf{视频质量和关键帧} 前面提到过，关键帧的选择需要视频质量和丢帧之间的一个动态均衡。为了指导关键帧的选择，我们尝试去变化关键帧大小，将很多未压缩的视频流压缩成h264格式，测量每次实验的视频质量。实验使用x264编码器去编码，x264编码器使用差别编码模式。越大的关键帧间隔越有可能引起累计误差，GOP的推荐值是小于250帧。虽然有了一个最大值250帧的限制，决定具体的关键帧间隔值依然是很复杂。我们使用的视频数据集包含超清视频，高清视频，游戏和4k视频。关键帧间隔和归一化SSIM的关系展示在图~\ref{fig:ssim_gop}中。我们从众多结果中挑选出四个视频的编码结果，代表整体的实验结果。从图中可以看出，当关键帧间隔大于0.5s后，SSIM基本保持不变。结合上面的两部分测量，当关键帧大于0.5s，由于压缩量化导致的视频质量损失很微小；而小的关键帧间隔会减少丢帧。总结上面的实验，我们得出当关键帧的最佳选择是$[0.5,2]s$的范围。
+\textbf{视频质量和关键帧} 关键帧间隔的选择需要在视频质量和丢帧数之间达到一个动态均衡。为了指导关键帧间隔的选择，我们重复进行了多次实验，每次实验改变关键帧间隔大小，将未压缩的视频流压缩成H264格式，测量压缩后的视频画面质量。实验中使用x264编码器~\cite{x264}去编码原始视频，实验中需要进行编码的原始视频为同一视频片段。x264编码器工作在差分编码模式，两个关键帧之间相隔的帧越多越有可能引起累计误差，GoP的推荐值是小于250帧。虽然最大限制值为250帧，但具体的关键帧间隔取值依然很复杂。我们使用的视频数据集包含各种不同类型的视频，超清视频，高清视频，游戏和4k视频~\cite{video}。关键帧间隔大小和归一化SSIM的关系展示在图~\ref{fig:ssim_gop}中，SSIM的单位值为一次实验中最大的SSIM值。我们从众多视频集中挑选出四组视频，代表整体的实验结果。从图中可以看出，当关键帧间隔大于0.5秒后，由于编码器压缩量化导致的视频质量损失很微小，SSIM的数值基本保持不变，在最大SSIM的(97\%-100\%)范围内。结合前面对关键帧间隔和丢帧数的关系的测量，选择小的关键帧间隔会减少丢帧数。总结上面的实验，我们给出了关键帧的建议选择范围，$[0.5,2]$秒。
 
 \begin{figure}[htb]% use float package if you want it here
   \centering
-  \includegraphics[width=\textwidth]{ssim_gop}
+  \includegraphics[width=0.7\textwidth]{ssim_gop}
   \caption{不同关键帧间隔时视频编码后的SSIM}
   \label{fig:ssim_gop}
 \end{figure}
 
 \section{智能丢帧策略}
-为了衡量算法的性能，我们对比了两个算法，离线最优算法Oracle和默认OBS算法。Oracle，通过暴力搜索达到离线最优，指数级的复杂度。我们从数据集中选择其中一段，时长30s。关键帧间隔选择上述给出的范围$[0.5，2]s$，我们选择为1s。为了研究算法优化丢帧的程度，我们将码率全程固定为2850kbps，使得选择的这段数据包含长时间的带宽抖动和带宽瞬时抖动。
+为了衡量丢帧算法的性能优化效果，我们选择了两个算法作为对比，离线最优算法Oracle和默认算法OBS。Oracle，通过暴力搜索加剪枝可以达到离线最优，但时间复杂度在指数级别。我们从带宽数据集中任意选择其中一段，时长为30秒附近。利用上一小节的结论，关键帧间隔的选择范围为$[0.5，2]$秒，我们将关键帧间隔设置为1秒。为了研究算法优化丢帧的效果，在三组实验中我们将码率都固定在2850kbps，小于初始带宽值，但远大于衰落之后的带宽值。合理的码率选择使得这段数据既包含长时间的带宽抖动，也包括瞬时的带宽抖动。
 
-\begin{figure}[htb]
+\begin{figure}[tb]
   \centering%
-  \begin{subfigure}{0.7\textwidth}
+  \begin{subfigure}{0.49\textwidth}
     \includegraphics[width=\textwidth]{drop-buffer}
     \caption{实时丢帧数}
     \label{fig:drop-buffer}
   \end{subfigure}%
-  \vfill
-  \vspace{0.2in}
-  \begin{subfigure}{0.7\textwidth}
+  \hfill
+  \begin{subfigure}{0.49\textwidth}
     \includegraphics[width=\textwidth]{drop-bandwidth}
     \caption{实时的吞吐量}
     \label{fig:drop-bandwidth}
@@ -47,29 +33,42 @@
   \label{fig:drop_comparison}
 \end{figure}
 
-丢帧的减少程度在表4中给出。上传失败时长定义为丢帧数对应的时长，即计算公式为上传失败时长=丢帧数/帧率。
-OBS在三个算法中丢帧数最多，上传失败时长最长，GreedyDrop减少了15\%的上传失败，改善效果比较明显。而且GreedyDrop算法和离线最优Oracle算法之间的差距较小，小于5\%。丢帧和吞吐量的时序图展示在图~\ref{fig:drop_comparison}中。丢帧的主要时间段位于5-10s和20-30s。5-10s时三个算法的表现基本相同，但是Oracle会在视频队列中保存更多的有效帧，当网络恢复后，10-15s时Oracle会将队列中的视频帧发送出去，相比于其他两个算法，减少了一些丢帧。20-30s左右，OBS的丢帧数上下摆动，方差很大，而GreedyDrop算法基本每个时刻很稳定。因为GreedyDrop算法只丢掉视频队列中旧的GOP的帧。GreedyDrop算法中，对于每个GOP，开头的帧被发送出去，剩余的帧都被丢弃，规律性的行为使得丢帧和吞吐量都保持不动。Oracle也是每个时隙的丢帧数有一定的波动，但是变化比较小。同时考虑时间复杂度和算法性能，GreedyDrop是个不错的选择。
+丢帧的减少程度在表~\ref{tab_drop}中给出。上传失败时长定义为丢帧数对应的播放时长，计算公式为上传失败时长=丢帧数/帧率。
 
+\begin{table}[tb]
+\centering
+\caption{与默认OBS算法相比丢帧的减少程度}
+\label{tab_drop}
+{\setlength{\tabcolsep}{2pt}
+\begin{tabular}{|c|c|c|l|}
+\hline
+\textbf{算法} &\textbf{丢帧数} &\textbf{上传失败时长（秒）} & \textbf{与默认OBS算法相比丢帧对应的百分比}    \\ \hline
+Oracle    &265  &8.83  &$80\%$           \\ \hline
+GreedyDrop  &274 &9.13  &$85.6\%$              \\ \hline
+OBS默认算法     &320  &10.67  &无 \\ \hline
+\end{tabular}}
+\end{table}
+
+三种算法中，默认OBS算法丢帧数最多，上传失败时长最长，GreedyDrop智能丢帧算法减少了15\%的上传失败，改善丢帧的效果较为明显。而且GreedyDrop在线算法和离线最优Oracle算法之间的差距较小，约等于5\%左右。实时丢帧数和真实吞吐量的时序图展示在图~\ref{fig:drop_comparison}中。丢帧主要发生的时间段位于7到12秒和20到30秒期间。7到12秒时三种算法的表现基本相同，实时带宽紧跟控制数据一起变化；因为Oracle算法知道网络恢复的具体时间，相对于其他算法，会在视频队列中保存更多的有效帧，当网络状况恢复后，10到15秒期间时Oracle算法会将队列中的视频帧以burst的形式发送出去，相比于其他两个算法，避免了一部分丢帧。20到30秒期间，网络经历着长时间的带宽抖动，OBS算法的丢帧数呈现周期性的振荡变化，方差很大，而GreedyDrop算法基本每个时刻的丢帧都很稳定。因为GreedyDrop算法只丢弃视频队列中属于旧的GoP的帧，而OBS算法每次丢帧将队列中的帧全部丢弃，因为丢帧行为会呈现一定的周期性。对于GreedyDrop算法，每个GoP开头的帧被发送出去，剩余的帧都被丢弃，规律性的行为使得丢帧数和吞吐量都保持恒定。Oracle算法和OBS算法的性能类似，每个时刻的丢帧数有一定的波动，但是方差变化比较小。同时考虑时间复杂度和算法性能，GreedyDrop是个不错的选择。
 
 \section{自适应码率算法}
-我们对比GVBR算法和三个在点播上表现很好的动态码率算法，我们用调和评估值来做带宽估计。
+我们选取了几个在视频点播方面性能很好的动态码率算法，作为对比算法，来和GVBR算法做比较。为了控制变量，保持对比算法的一致性，和GVBR算法一样，对比算法中我们依然用调和平均值来作为对带宽的预估。
 \begin{itemize}
-  \item OBS-VBR：简单直接的码率自适应算法，每次都选择比估计带宽低的最高码率，除此之外，使用OBS默认的丢帧策略。
-  \item MPC：用队列状态信息（帧数和帧的大小，以及帧的类型）和预测的带宽值去计算接下来几个时隙的最优码率选择，但只应用第一个时隙的码率选择。
-  \item Robust-MPC：使用和MPC类似的方法，但是用过去几个时隙的最大预测误差去矫正带宽估计。
+  \item OBS-VBR：简单直接的码率自适应算法，和OBS默认算法基本一致，使用OBS默认的丢帧策略，唯一的不同点在于动态码率，每个时刻都选择比估计带宽低的最高可用码率。
+  \item MPC：用队列状态信息（帧数和帧的大小，以及帧的类型）和预测带宽值去计算接下来几个时隙的最优码率选择，但只应用第一个时隙的码率选择，对于之后的时隙重复上述过程。
+  \item Robust-MPC：使用和MPC类似的方法，唯一的不同点，在于用过去几个时隙的最大预测误差去矫正未来几个时隙的带宽估计。
 \end{itemize}
-上述的算法使用GreedyDrop作为丢帧策略，除了OBS-VBR之外。Robust-MPC是视频点播领域最先进的码率自适应算法。默认预测控制理论，简称MPC，也可以直接应用到直播场景下。
+除了OBS-VBR算法之外，上述的几个对比算法均用GreedyDrop作为丢帧策略。Robust-MPC是视频点播领域最先进的码率自适应算法，MPC算法和Robust-MPC算法均是使用模型预测控制理论去选择未来时隙的码率。模型预测控制理论，简称MPC，主要的思想是预测未来几个时隙的带宽和系统状态，计算几个时隙的最优选择，但在应用时只用第一个时隙的选择，这个理论可以直接应用到直播场景中去，因此我们选择将Robust-MPC和MPC作为我们的直播动态码率对比算法。
 
-\begin{figure}[htb]
+\begin{figure}[tb]
   \centering%
-  \begin{subfigure}{0.7\textwidth}
+  \begin{subfigure}{0.5\textwidth}
     \includegraphics[width=\textwidth]{specific_fcc}
     \caption{FCC数据集的实时吞吐量}
     \label{fig:fcc}
   \end{subfigure}%
-  \vfill
-  \vspace{0.2in}
-  \begin{subfigure}{0.7\textwidth}
+  \hfill
+  \begin{subfigure}{0.5\textwidth}
     \includegraphics[width=\textwidth]{specific_hsdpa}
     \caption{HSDPA数据集的实时吞吐量}
     \label{fig:hsdpa}
@@ -78,34 +77,33 @@ OBS在三个算法中丢帧数最多，上传失败时长最长，GreedyDrop减�
   \label{fig:specific}
 \end{figure}
 
-详细的对比算法结果展示在图~\ref{fig:specific}中。图~\ref{fig:fcc}和图~\ref{fig:hsdpa}分别对比了FCC数据集和HSDPA数据集下三种算法的性能。在这两幅图中，实线代表真实世界的带宽数据。相比于Robust-MPC，MPC缺少预测误差的矫正，容易更激进的选择更高的码率。除此之外，两个MPC算法的码率总是在真实带宽附近波动。两种情况下，MPC和Robust-MPC的码率切换都比GVBR更频繁。因为GVBR总是选择比带宽低的码率，当带宽波动较小时，GVBR很有发生变化。但是MPC总是选择一个使效益最高的码率，当带宽稍微增加一点，MPC会更加倾向于选择一个更高的码率，增大优化目标中的第一项，码率效益。
+详细的对比算法结果展示在图~\ref{fig:specific}中。图~\ref{fig:fcc}和图~\ref{fig:hsdpa}分别展示了FCC数据集和HSDPA数据集下三种算法的性能。在这两幅图中，实线代表着真实世界的带宽数据记录。相比于Robust-MPC，MPC缺少对预测误差的矫正，容易更激进的选择更高的码率，反映到图中，MPC每个时刻的码率总是高于Robust-MPC的码率。除此之外，两个MPC算法的码率总是在真实带宽附近波动。两种数据集下，MPC和Robust-MPC的码率切换都比GVBR更频繁。这是因为GVBR的策略是选择比带宽低的最高码率，当带宽波动较小时，GVBR很有发生变化。但是MPC的策略是选择一个使用户体验质量最高的码率，当带宽稍微波动一点，MPC会更加倾向于选择一个更高或码率，增大优化目标中的第一项，码率相关的效益。而Robust-MPC虽然增加了对于预测误差的矫正，但依然是求几个时隙的最优选择，和MPC的行为较为类似。
 
-\begin{figure}[htb]% use float package if you want it here
+\begin{figure}[tb]% use float package if you want it here
   \centering
-  \includegraphics[width=\textwidth]{massive_qoe}
+  \includegraphics[width=0.7\textwidth]{massive_qoe}
   \caption{归一化平均码率，上传失败时长和用户体验质量}
   \label{fig:massive_qoe}
 \end{figure}
 
-大规模的仿真结果展示在图~\ref{fig:massive_qoe}中，我们用两个数据集去评估GVBR算法，FCC数据集和HSDPA数据集。图中展示的用户体验质量是归一化的体验质量。在所有四种算法中，MPC有最大的码率用户体验，因为带宽估计算法很激进，MPC会更倾向于选择高码率。其他三种算法有些相同的平均码率，其中GVBR要稍微高一点。MPC有着最高的码率，也带来了最高的丢帧数，平均上传失败的时长最长。GVBR将平均上传失败的时长减少到很小，相对于Robust-MPC减少了50\%。有还不错的码率以及低的上传失败时长，GVBR明显是所有算法中最高的，达到了最高的用户体验质量。
+大规模的仿真实验结果展示在图~\ref{fig:massive_qoe}中，我们结合两个数据集去评估GVBR算法的性能，分别是FCC数据集和HSDPA数据集。图中展示的三项指标，码率，上传失败时长和用户体验质量都是归一化之后的平均指标。四种算法中，MPC拥最高的码率效益，这是因为MPC的带宽估计算法很激进，会更倾向于选择较高的码率。其他三种算法有着基本相同的平均码率，其中GVBR和Robust-MPC两种算法的平均码率稍微高一点，高于OBS-VBR算法。虽然MPC达到了最高的码率水平，但也带来了最高的丢帧数，对应的平均上传失败的时间也最长。OBS-VBR算法使用的丢帧算法是默认的OBS丢帧策略，所以在剩余三种算法中上传失败的时长最高。Robust-MPC算法相对于MPC算法来说增加了对于预测误差的纠正，将上传失败时间减少到可以忍受的时长。因为考虑了队列中排队等待发送的视频帧的数据量，GVBR将平均上传失败的时长减少到很少的时间，相对于Robust-MPC减少了50\%左右。平均码率略微高于多个对比算法，而且平均上传失败时长很短，GVBR的用户体验质量在所有算法中达到了最高水平。剩余三种算法的用户体验质量排序分别是Robust-MPC，OBS-VBR和MPC。
 
-\begin{figure}[htb]
+\begin{figure}[tb]
   \centering%
-  \begin{subfigure}{0.5\textwidth}
+  \begin{subfigure}{0.48\textwidth}
     \includegraphics[width=\textwidth]{massive-bitrate-cdf}
     \caption{平均码率累计分布图}
     \label{fig:bitrate_cdf}
   \end{subfigure}%
-  \vfill
-  \vspace{0.2in}
-  \begin{subfigure}{0.5\textwidth}
+  \hfill
+  \begin{subfigure}{0.48\textwidth}
     \includegraphics[width=\textwidth]{massive-drop-cdf}
     \caption{上传失败时长累计分布图}
     \label{fig:drop_cdf}
   \end{subfigure}
   \vfill
   \vspace{0.2in}
-  \begin{subfigure}{0.5\textwidth}
+  \begin{subfigure}{0.48\textwidth}
     \includegraphics[width=\textwidth]{massive-qoe-cdf}
     \caption{归一化用户体验质量累计分布图}
     \label{fig:qoe_cdf}
@@ -114,6 +112,40 @@ OBS在三个算法中丢帧数最多，上传失败时长最长，GreedyDrop减�
   \label{fig:massive_cdf}
 \end{figure}
 
-关于码率，上传失败时长和归一化用户体验质量的累计分布图展示在图~\ref{fig:massive_cdf}。在图~\ref{fig:bitrate_cdf}中，GVBR位于Robust-MPC和OBS的右边，码率稍微高于这两者。GVBR中，98\%的上传失败时间都低于5s，有大约40\%的的情况未出现上传失败。GVBR算法中，只有2\%的情况下用户体验质量不是很好，其余的98\%归一化用户体验质量大约在$[0.8,1]$之间。
+平均码率，平均上传失败时长和平均用户体验质量的累计分布图展示在图~\ref{fig:massive_cdf}中。在图~\ref{fig:bitrate_cdf}中，GVBR算法位于Robust-MPC和OBS算法的右边，码率值稍微高于这两者。
+MPC位于其余三种算法的右边，码率值远远高于其他三种算法，和图~\ref{fig:massive_qoe}的结论一致。从图~\ref{fig:drop_cdf}中可以看出，对于GVBR算法，98\%的实验其上传失败时间都低于5秒，有大约40\%的的实验中未出现过上传失败。
+而其余三种算法低于5秒上传失败时间的百分比分别是，Robust-MPC有90\%的实验上传失败时长低于5秒，OBS-VBR有70\%的实验，MPC只有30\%的实验。
+图~\ref{fig:qoe_cdf}显示，GVBR算法只有2\%的实验中用户体验质量不是很好，其余的98\%的情况下归一化用户体验质量大约在$[0.8,1]$之间。剩余三种算法的归一化用户体验质量大于80\%的比例分别是，MPC为30\%，OBS-VBR为70\%，Robust-MPC为90\%。
+总而言之，我们的GVBR算法在上传失败时长和用户体验质量两个指标上远远优于其他几个算法。
 
-相比于最原始的固定码率OBS算法，GVBR减少了96\%的丢帧。原始的OBS算法平均上传失败时长是26s，而我们的GVBR算法只有1s的平均失败时长。总的来说，我们的GVBR算法实现了更高的码率，在此同时显著减少了上传失败的发生。
+\begin{table}[tb]
+\centering
+\caption{码率自适应算法效果对比}
+\label{tab:vbr}
+{\setlength{\tabcolsep}{2pt}
+\begin{tabular}{|c|c|c|l|}
+\hline
+\textbf{算法} &\textbf{平均码率(Mbps)} &\textbf{平均上传失败时长（秒）} & \textbf{平均用户体验质量}    \\ \hline
+OBS    &1.0788  &26.1438  &-39107.835           \\ \hline
+OBS-VBR  &1.0256 &3.9763  &-5862.833         \\ \hline
+MPC     &1.3060  &8.0017  &-11877.126 \\ \hline
+Robust-MPC &1.0781 &2.2553 &-3281.921 \\ \hline
+GVBR &1.0821 &1.1414 &-1605.033 \\ \hline
+\end{tabular}}
+\end{table}
+
+由于固定码率的OBS默认算法和四种自适应码率算法的性能差别过大，上述性能比较图中未出现默认OBS算法的对比。我们将默认OBS算法和几种动态码率算法的对比结果整理在表~\ref{tab:vbr}中。相比于最原始的固定码率OBS算法，GVBR算法减少了95.6\%的丢帧。
+原始的OBS算法平均上传失败时长是26秒，而我们的GVBR算法只有1秒的平均失败时长。除了MPC算法之外，GVBR算法拥有最高的平均码率，略微高于其他三种算法。总的来说，我们的GVBR算法实现了更高的码率，与此同时显著减少了上传失败的发生。另外，
+表中可以得到的一个结论是，运用自适应码率算法之后可以大幅度减少上传失败现象的发生。
+
+\section{本章小结}
+本章对于提出的优化方案进行了系统的性能评估，主要包括不同层面的方案，GoP层面的减少关键帧间隔以及码率自适应算法，GoP内部的智能丢帧策略。
+
+首先，本章针对关键帧间隔大小对视频质量的影响进行了评估，发现了当关键帧间隔减少到一定值之后，视频质量呈现急剧下降，严重损害用户的观看体验。
+为了避免这种现象，关键帧间隔在选取时应严格遵循最小取值的约束，减少丢帧现象发生的同时保证视频质量。
+
+其次，对于棘手的丢帧策略选择，我们对比了离线最优算法和GreedyDrop算法的优劣。相比于默认的OBS丢帧策略，GreedyDrop和离线最优算法的性能明显优于前面两者。
+但是离线最优算法的时间复杂度为指数级，对于移动设备的计算性能要求太高，而且离线最优算法需要已知全程的带宽状况，这在实际中是不可行的。综合时间复杂度和对于减少丢帧的性能改善，GreedyDrop算法是较优的选择。
+
+最后，对于我们最后提出的一整套的解决方案GVBR，进行了充分的性能评估。不仅与视频点播领域较为先进的码率自适应算法MPC对比，而且和最原始的默认OBS算法进行了对比。
+实验结果显示，除了在平均码率的指标上略逊色于MPC算法，在平均上传失败时长和用户体验质量方面远远优于其他几种算法。
