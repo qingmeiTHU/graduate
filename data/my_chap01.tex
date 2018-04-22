@@ -58,3 +58,32 @@ RTMP（Real Time Message Protocol），即实时消息传送协议，用于传�
 
 第七章总结现有的工作，并展望未来的研究方向。
 
+\begin{table}[htb]
+	\centering
+	%\vspace{-0.3cm}
+	\caption{本文使用符号总结}
+	\label{tab:notation}
+	\begin{tabularx}{\linewidth}{lX}
+		\toprule[1.5pt]
+		% after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+		{\textbf{符号}} & {\textbf{定义}}   \\\midrule[1pt]
+		$C_i$ & 云数据中心i \\
+		$U_j$ & 用户j\\
+		$G_i$ & $C_i$传输每数据块的经济开销 (单位: \$)\\
+		$L_j$ & $U_j$的用户感知延迟 \\
+		$D_j$ & $U_j$的公平用户感知延迟 \\
+		$D$ & 所有用户中最大的公平用户感知延迟\\
+		$x_{ijk}$ & 在时隙$k$中$U_j$从$C_i$下载的数据块数量\\
+		$y_{jk}$ & 在时隙$k$中$U_j$是否完成传输的二元变量，当$U_j$完成传输时，$y_{jk}=0$，否则$y_{jk}=1$\\
+		$\lambda$ & 为调整终端用户公平性的公平性因子\\
+		$\tau$ & 时隙的长度 (单位: 秒)\\
+		$u_{ik}$ & 在时隙$k$中$C_i$的带宽 (单位: MB/s)\\
+		$d_{ijk}$ & 在时隙$k$中$C_i$和$U_j$之间的端到端带宽 (单位: MB/s)\\
+		$b_{j}$ & $U_j$的带宽约束 (单位: MB/s)\\
+		$\omega$ & 每个数据块的数据量大小 \\
+		$W_j$ & $U_j$请求文件的总数据量 (单位: MB)\\
+		$A_j$ & $U_j$发出请求的时间\\
+		$f$ & 在一个调度周期内的经济成本约束 \\
+		\bottomrule[1.5pt]
+	\end{tabularx}
+\end{table}

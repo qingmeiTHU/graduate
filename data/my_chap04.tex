@@ -128,8 +128,8 @@ $M_{j}$       & 常量         & 第j个时刻可以发送的最大帧编号 \\ 
 \textbf{优化目标} 整个问题的目标函数是去最大化传输成功的帧数。与点播视频的传输问题相比，我们的模型考虑了帧的传输及时性和是否能正常解码等约束条件，更加符合个人交互直播的场景。目标函数如下：
 \begin{eqnarray}
 % \nonumber % Remove numbering (before each equation)
-&\min & \Sigma_i {y_{iT}} \nonumber
-\label{obj}
+  && \min \Sigma_i {y_{iT}}
+%\label{obj}
 \end{eqnarray}
 
 \subsection{启发式算法}
@@ -190,8 +190,8 @@ $T_1$               &变量          & 一个帧能够在队列中留存的时�
 
 建模使用的符号全部包含在表~\ref{vbr_vbr}中。为了研究最优的动态码率，我们引入了一组码率相关的变量，其中$R_j$表现第j帧所对应的码率。使用GreedyDrop作为我们的丢帧策略，效益函数可以建模成下面的等式。
 \begin{eqnarray}
-&\max & \sum R_j- \alpha\sum|R_{j+1}-R_j|-\beta\sum D_j \nonumber
-\label{vbr_obj}
+  && \max \sum R_j- \alpha\sum|R_{j+1}-R_j|-\beta\sum D_j
+%\label{vbr_obj}
 \end{eqnarray}
 等式中的第一项是选择的视频清晰度带来的效益，第二项代表由于视频的码率切换带来的损失，最后一项等于由于网络抖动丢帧带来的损失。变量$\alpha$和$\beta$对应码率切换损失和丢帧损失的系数。
 
