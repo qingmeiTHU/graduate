@@ -1,0 +1,347 @@
+\begin{thebibliography}{50}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{#1}
+\providecommand{\href}[2]{\url{#2}}
+\providecommand{\doi}[1]{DOI: \href{http://dx.doi.org/#1}{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax\relax\else
+  \urlstyle{same}\fi
+
+\bibitem[CNNIC()]{CNNIC}
+CNNIC.
+\newblock
+  第41次《中国互联网络发展状况统计报告》\allowbreak[EB/OL].
+\newblock
+  \url{http://www.cnnic.net.cn/hlwfzyj/hlwxzbg/hlwtjbg/201803/P020180305409870339136.pdf}.
+
+\bibitem[Cisco()]{Cisco2017}
+Cisco.
+\newblock Cisco visual networking index: Forecast and methodology,
+  2016–2021\allowbreak[EB/OL].
+\newblock
+  \url{https://www.cisco.com/c/en/us/solutions/collateral/service-provider/visual-networking-index-vni/complete-white-paper-c11-481360.html#_Toc484813971}.
+
+\bibitem[斗鱼()]{Douyu}
+斗鱼.
+\newblock 斗鱼直播平台\allowbreak[EB/OL].
+\newblock \url{https://www.douyu.com/}.
+
+\bibitem[熊猫直播()]{Panda}
+熊猫直播.
+\newblock 熊猫tv\allowbreak[EB/OL].
+\newblock \url{https://www.panda.tv/}.
+
+\bibitem[Facebook()]{Facebook}
+Facebook.
+\newblock Facebook live\allowbreak[EB/OL].
+\newblock \url{https://live.fb.com/}.
+
+\bibitem[Periscope()]{Periscope}
+Periscope.
+\newblock Periscope\allowbreak[EB/OL].
+\newblock \url{https://www.pscp.tv/}.
+
+\bibitem[Zhang\ et~al.(2005)Zhang, Liu, Li, and Yum]{zhang2005coolstreaming}
+Zhang X, Liu J, Li B, et~al.
+\newblock Coolstreaming/donet: A data-driven overlay network for peer-to-peer
+  live media streaming\allowbreak[C]//\allowbreak{}INFOCOM 2005. 24th Annual
+  Joint Conference of the IEEE Computer and Communications Societies.
+  Proceedings IEEE: volume~3.
+\newblock [S.l.]: IEEE, 2005: 2102--2111.
+
+\bibitem[Mukerjee\ et~al.(2015)Mukerjee, Naylor, Jiang, Han, Seshan, and
+  Zhang]{mukerjee2015practical}
+Mukerjee M~K, Naylor D, Jiang J, et~al.
+\newblock Practical, real-time centralized control for cdn-based live video
+  delivery\allowbreak[C]//\allowbreak{}ACM SIGCOMM Computer Communication
+  Review: volume~45.
+\newblock [S.l.]: ACM, 2015: 311--324.
+
+\bibitem[Liao\ et~al.(2006)Liao, Jin, Liu, Ni, and Deng]{liao2006anysee}
+Liao X, Jin H, Liu Y, et~al.
+\newblock Anysee: Peer-to-peer live
+  streaming\allowbreak[C]//\allowbreak{}INFOCOM 2006. 25th IEEE International
+  Conference on Computer Communications. Proceedings.
+\newblock [S.l.]: Citeseer, 2006: 1--10.
+
+\bibitem[Hei\ et~al.(2007)Hei, Liu, and Ross]{hei2007inferring}
+Hei X, Liu Y, Ross K~W.
+\newblock Inferring network-wide quality in p2p live streaming
+  systems\allowbreak[J].
+\newblock IEEE journal on Selected Areas in Communications, 2007, 25\penalty0
+  (9).
+
+\bibitem[Magharei\ et~al.(2007)Magharei, Rejaie, and Guo]{magharei2007mesh}
+Magharei N, Rejaie R, Guo Y.
+\newblock Mesh or multiple-tree: A comparative study of live p2p streaming
+  approaches\allowbreak[C]//\allowbreak{}INFOCOM 2007. 26th IEEE International
+  Conference on Computer Communications. IEEE.
+\newblock [S.l.]: IEEE, 2007: 1424--1432.
+
+\bibitem[Yin\ et~al.(2009)Yin, Liu, Zhan, Sekar, Qiu, Lin, Zhang, and
+  Li]{yin2009design}
+Yin H, Liu X, Zhan T, et~al.
+\newblock Design and deployment of a hybrid cdn-p2p system for live video
+  streaming: experiences with livesky\allowbreak[C]//\allowbreak{}Proceedings
+  of the 17th ACM international conference on Multimedia.
+\newblock [S.l.]: ACM, 2009: 25--34.
+
+\bibitem[Zhang\ et~al.(2015)Zhang and Liu]{zhang2015crowdsourced}
+Zhang C, Liu J.
+\newblock On crowdsourced interactive live streaming: a twitch. tv-based
+  measurement study\allowbreak[C]//\allowbreak{}Proceedings of the 25th ACM
+  Workshop on Network and Operating Systems Support for Digital Audio and
+  Video.
+\newblock [S.l.]: ACM, 2015: 55--60.
+
+\bibitem[Twitch()]{Twitch}
+Twitch.
+\newblock twitch.tv\allowbreak[EB/OL].
+\newblock \url{https://www.twitch.tv/}.
+
+\bibitem[Siekkinen\ et~al.(2016)Siekkinen, Masala, and
+  K{\"a}m{\"a}r{\"a}inen]{siekkinen2016first}
+Siekkinen M, Masala E, K{\"a}m{\"a}r{\"a}inen T.
+\newblock A first look at quality of mobile live streaming experience: the case
+  of periscope\allowbreak[C]//\allowbreak{}Proceedings of the 2016 Internet
+  Measurement Conference.
+\newblock [S.l.]: ACM, 2016: 477--483.
+
+\bibitem[Wang\ et~al.(2016)Wang, Zhang, Wang, Zheng, and Zhao]{wang2016anatomy}
+Wang B, Zhang X, Wang G, et~al.
+\newblock Anatomy of a personalized livestreaming
+  system\allowbreak[C]//\allowbreak{}Proceedings of the 2016 Internet
+  Measurement Conference.
+\newblock [S.l.]: ACM, 2016: 485--498.
+
+\bibitem[Meerkat()]{Meerkat}
+Meerkat.
+\newblock Meerkat(app)\allowbreak[EB/OL].
+\newblock \url{https://en.wikipedia.org/wiki/meerkat}.
+
+\bibitem[Li\ et~al.(2013)Li, Wang, Liu, and Zhu]{li2013two}
+Li B, Wang Z, Liu J, et~al.
+\newblock Two decades of internet video streaming: A retrospective
+  view\allowbreak[J].
+\newblock ACM transactions on multimedia computing, communications, and
+  applications (TOMM), 2013, 9\penalty0 (1s): 33.
+
+\bibitem[Apple()]{Apple}
+Apple.
+\newblock Apple http live streaming\allowbreak[EB/OL].
+\newblock \url{https://developer.apple.com/streaming/}.
+
+\bibitem[Stockhammer(2011)]{stockhammer2011dynamic}
+Stockhammer T.
+\newblock Dynamic adaptive streaming over http--: standards and design
+  principles\allowbreak[C]//\allowbreak{}Proceedings of the second annual ACM
+  conference on Multimedia systems.
+\newblock [S.l.]: ACM, 2011: 133--144.
+
+\bibitem[Sodagar(2011)]{sodagar2011mpeg}
+Sodagar I.
+\newblock The mpeg-dash standard for multimedia streaming over the
+  internet\allowbreak[J].
+\newblock IEEE MultiMedia, 2011, 18\penalty0 (4): 62--67.
+
+\bibitem[Wei\ et~al.(2014)Wei and Swaminathan]{wei2014low}
+Wei S, Swaminathan V.
+\newblock Low latency live video streaming over http
+  2.0\allowbreak[C]//\allowbreak{}Proceedings of Network and Operating System
+  Support on Digital Audio and Video Workshop.
+\newblock [S.l.]: ACM, 2014: 37.
+
+\bibitem[Swaminathan\ et~al.(2011)Swaminathan and Wei]{swaminathan2011low}
+Swaminathan V, Wei S.
+\newblock Low latency live video streaming using http chunked
+  encoding\allowbreak[C]//\allowbreak{}Multimedia Signal Processing (MMSP),
+  2011 IEEE 13th International Workshop on.
+\newblock [S.l.]: IEEE, 2011: 1--6.
+
+\bibitem[Hannuksela\ et~al.(2003)Hannuksela, Wang, and
+  Gabbouj]{hannuksela2003random}
+Hannuksela M~M, Wang Y~K, Gabbouj M.
+\newblock Random access using isolated
+  regions\allowbreak[C]//\allowbreak{}Image Processing, 2003. ICIP 2003.
+  Proceedings. 2003 International Conference on: volume~3.
+\newblock [S.l.]: IEEE, 2003: III--841.
+
+\bibitem[Bouzakaria\ et~al.(2014)Bouzakaria, Concolato, and
+  Le~Feuvre]{bouzakaria2014overhead}
+Bouzakaria N, Concolato C, Le~Feuvre J.
+\newblock Overhead and performance of low latency live streaming using
+  mpeg-dash\allowbreak[C]//\allowbreak{}Information, Intelligence, Systems and
+  Applications, IISA 2014, The 5th International Conference on.
+\newblock [S.l.]: IEEE, 2014: 92--97.
+
+\bibitem[Mao\ et~al.(2017)Mao, Netravali, and Alizadeh]{mao2017neural}
+Mao H, Netravali R, Alizadeh M.
+\newblock Neural adaptive video streaming with
+  pensieve\allowbreak[C]//\allowbreak{}Proceedings of the Conference of the ACM
+  Special Interest Group on Data Communication.
+\newblock [S.l.]: ACM, 2017: 197--210.
+
+\bibitem[Akhshabi\ et~al.(2011)Akhshabi, Begen, and
+  Dovrolis]{akhshabi2011experimental}
+Akhshabi S, Begen A~C, Dovrolis C.
+\newblock An experimental evaluation of rate-adaptation algorithms in adaptive
+  streaming over http\allowbreak[C]//\allowbreak{}Proceedings of the second
+  annual ACM conference on Multimedia systems.
+\newblock [S.l.]: ACM, 2011: 157--168.
+
+\bibitem[Petrangeli\ et~al.(2016)Petrangeli, Famaey, Claeys, Latr{\'e}, and
+  De~Turck]{petrangeli2016qoe}
+Petrangeli S, Famaey J, Claeys M, et~al.
+\newblock Qoe-driven rate adaptation heuristic for fair adaptive video
+  streaming\allowbreak[J].
+\newblock ACM Transactions on Multimedia Computing, Communications, and
+  Applications (TOMM), 2016, 12\penalty0 (2): 28.
+
+\bibitem[Jiang\ et~al.(2014)Jiang, Sekar, and Zhang]{jiang2014improving}
+Jiang J, Sekar V, Zhang H.
+\newblock Improving fairness, efficiency, and stability in http-based adaptive
+  video streaming with festive\allowbreak[J].
+\newblock IEEE/ACM Transactions on Networking (TON), 2014, 22\penalty0 (1):
+  326--340.
+
+\bibitem[Li\ et~al.(2014)Li, Zhu, Gahm, Pan, Hu, Begen, and Oran]{li2014probe}
+Li Z, Zhu X, Gahm J, et~al.
+\newblock Probe and adapt: Rate adaptation for http video streaming at
+  scale\allowbreak[J].
+\newblock IEEE Journal on Selected Areas in Communications, 2014, 32\penalty0
+  (4): 719--733.
+
+\bibitem[Akhshabi\ et~al.(2012)Akhshabi, Anantakrishnan, Begen, and
+  Dovrolis]{akhshabi2012happens}
+Akhshabi S, Anantakrishnan L, Begen A~C, et~al.
+\newblock What happens when http adaptive streaming players compete for
+  bandwidth?\allowbreak[C]//\allowbreak{}Proceedings of the 22nd international
+  workshop on Network and Operating System Support for Digital Audio and Video.
+\newblock [S.l.]: ACM, 2012: 9--14.
+
+\bibitem[Huang\ et~al.(2015)Huang, Johari, McKeown, Trunnell, and
+  Watson]{huang2015buffer}
+Huang T~Y, Johari R, McKeown N, et~al.
+\newblock A buffer-based approach to rate adaptation: Evidence from a large
+  video streaming service\allowbreak[J].
+\newblock ACM SIGCOMM Computer Communication Review, 2015, 44\penalty0 (4):
+  187--198.
+
+\bibitem[Yin\ et~al.(2015)Yin, Jindal, Sekar, and Sinopoli]{yin2015control}
+Yin X, Jindal A, Sekar V, et~al.
+\newblock A control-theoretic approach for dynamic adaptive video streaming
+  over http\allowbreak[C]//\allowbreak{}ACM SIGCOMM Computer Communication
+  Review: volume~45.
+\newblock [S.l.]: ACM, 2015: 325--338.
+
+\bibitem[Nihei\ et~al.(2017)Nihei, Yoshida, Kai, Kanetomo, and
+  Satoda]{nihei2017qoe}
+Nihei K, Yoshida H, Kai N, et~al.
+\newblock Qoe maximizing bitrate control for live video streaming on a mobile
+  uplink\allowbreak[C]//\allowbreak{}Telecommunications (ConTEL), 2017 14th
+  International Conference on.
+\newblock [S.l.]: IEEE, 2017: 91--98.
+
+\bibitem[Pires\ et~al.(2014)Pires and Simon]{pires2014dash}
+Pires K, Simon G.
+\newblock Dash in twitch: Adaptive bitrate streaming in live game streaming
+  platforms\allowbreak[C]//\allowbreak{}Proceedings of the 2014 Workshop on
+  Design, Quality and Deployment of Adaptive Video Streaming.
+\newblock [S.l.]: ACM, 2014: 13--18.
+
+\bibitem[De~Cicco\ et~al.(2011)De~Cicco, Mascolo, and
+  Palmisano]{de2011feedback}
+De~Cicco L, Mascolo S, Palmisano V.
+\newblock Feedback control for adaptive live video
+  streaming\allowbreak[C]//\allowbreak{}Proceedings of the second annual ACM
+  conference on Multimedia systems.
+\newblock [S.l.]: ACM, 2011: 145--156.
+
+\bibitem[Yu\ et~al.(2018)Yu, Jung, Kim, and Jung]{yu2018impact}
+Yu E, Jung C, Kim H, et~al.
+\newblock Impact of viewer engagement on gift-giving in live video
+  streaming\allowbreak[J].
+\newblock Telematics and Informatics, 2018.
+
+\bibitem[Krasic\ et~al.(2003)Krasic, Walpole, and Feng]{krasic2003quality}
+Krasic C, Walpole J, Feng W~c.
+\newblock Quality-adaptive media streaming by priority
+  drop\allowbreak[C]//\allowbreak{}Proceedings of the 13th international
+  workshop on Network and operating systems support for digital audio and
+  video.
+\newblock [S.l.]: ACM, 2003: 112--121.
+
+\bibitem[Singh\ et~al.(2004)Singh, Leong, and Chakravarty]{singh2004dynamic}
+Singh S~K, Leong H~W, Chakravarty S~N.
+\newblock A dynamic-priority based approach to streaming video over cellular
+  network\allowbreak[C]//\allowbreak{}Computer Communications and Networks,
+  2004. ICCCN 2004. Proceedings. 13th International Conference on.
+\newblock [S.l.]: IEEE, 2004: 281--286.
+
+\bibitem[Huang\ et~al.(2003)Huang, Krasic, and Walpole]{huang2003adaptive}
+Huang J, Krasic C, Walpole J.
+\newblock Adaptive live video streaming by priority drop\allowbreak[M].
+\newblock [S.l.: s.n.], 2003.
+
+\bibitem[Fouladi\ et~al.(2018)Fouladi, Emmons, Orbay, Wu, Wahby, and
+  Winstein]{fouladi2018salsify}
+Fouladi S, Emmons J, Orbay E, et~al.
+\newblock Salsify: Low-latency network video through tighter integration
+  between a video codec and a transport
+  protocol\allowbreak[C]//\allowbreak{}15th USENIX Symposium on Networked
+  Systems Design and Implementation (NSDI 18).
+\newblock [S.l.]: USENIX Association, 2018: 267--282.
+
+\bibitem[OBS()]{OBS}
+OBS.
+\newblock Obs project\allowbreak[EB/OL].
+\newblock \url{https://obsproject.com/}.
+
+\bibitem[dummynet()]{dummynet}
+dummynet.
+\newblock dummynet\allowbreak[EB/OL].
+\newblock \url{http://info.iet.unipi.it/~luigi/dummynet/}.
+
+\bibitem[FCC()]{FCC}
+FCC.
+\newblock Measuring fixed broadband report-2016\allowbreak[EB/OL].
+\newblock
+  \url{https://www.fcc.gov/reports-research/reports/measuring-broadband-america/measuring-fixed-broadband-report-2016#block-menu-block-4}.
+
+\bibitem[Riiser\ et~al.(2013)Riiser, Vigmostad, Griwodz, and
+  Halvorsen]{riiser2013commute}
+Riiser H, Vigmostad P, Griwodz C, et~al.
+\newblock Commute path bandwidth traces from 3g networks: analysis and
+  applications\allowbreak[C]//\allowbreak{}Proceedings of the 4th ACM
+  Multimedia Systems Conference.
+\newblock [S.l.]: ACM, 2013: 114--118.
+
+\bibitem[Hore\ et~al.(2010)Hore and Ziou]{hore2010image}
+Hore A, Ziou D.
+\newblock Image quality metrics: Psnr vs.
+  ssim\allowbreak[C]//\allowbreak{}Pattern recognition (icpr), 2010 20th
+  international conference on.
+\newblock [S.l.]: IEEE, 2010: 2366--2369.
+
+\bibitem[Shea\ et~al.(2013)Shea, Liu, Ngai, and Cui]{shea2013cloud}
+Shea R, Liu J, Ngai E~C~H, et~al.
+\newblock Cloud gaming: architecture and performance\allowbreak[J].
+\newblock Ieee Network, 2013, 27\penalty0 (4): 16--21.
+
+\bibitem[x264()]{x264}
+x264.
+\newblock x264\allowbreak[EB/OL].
+\newblock \url{https://www.videolan.org/developers/x264.html}.
+
+\bibitem[Lai\ et~al.(2017)Lai, Hu, Cui, Sun, and Dai]{lai2017furion}
+Lai Z, Hu Y~C, Cui Y, et~al.
+\newblock Furion: Engineering high-quality immersive virtual reality on today's
+  mobile devices\allowbreak[C]//\allowbreak{}Proceedings of the 23rd Annual
+  International Conference on Mobile Computing and Networking.
+\newblock [S.l.]: ACM, 2017: 409--421.
+
+\bibitem[Xiph.org()]{video}
+Xiph.org.
+\newblock Xiph.org video test media [derf's collection]\allowbreak[EB/OL].
+\newblock \url{https://media.xiph.org/video/derf/}.
+
+\end{thebibliography}

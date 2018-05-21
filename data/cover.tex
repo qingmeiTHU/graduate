@@ -14,12 +14,12 @@
   %=========
   % 中文信息
   %=========
-  ctitle={移动网络中交互直播主播端的传输优化研究},
+  ctitle={移动网络中交互直播的主播端~传输优化},
   cdegree={工程硕士},
   cdepartment={计算机科学与技术系},
   cmajor={计算机技术},
   cauthor={任青妹},
-  csupervisor={崔勇教授},
+  csupervisor={崔\hspace*{32px}勇教授},
   %cassosupervisor={陈文光教授}, % 副指导老师
   %ccosupervisor={某某某教授}, % 联合指导老师
   % 日期自动使用当前时间，若需指定按如下方式修改：
@@ -60,51 +60,50 @@
   % edate={December, 2005}
   %
   % 关键词用“英文逗号”分割
-  ckeywords={交互直播, 主播端, 用户体验质量, 移动网络，自适应码率},
+  ckeywords={交互直播, 主播端, 用户体验质量, 移动网络, 自适应码率},
   ekeywords={Personalized Live Video Streaming, Broadcaster, QoE, Mobile Network, Adaptive Bitrate}
 }
 
 % 定义中英文摘要和关键字
 \begin{cabstract}
-移动设备的大量普及以及LTE等通信技术的迅速发展让用户不再满足于单纯的观看视频直播，用户逐渐成为直播内容的贡献者。传统的流媒体直播技术，不能有效地应对无线网络的带宽抖动，也不能满足交互直播端到端时延短以及高交互的性能要求。RTMP协议因为其流式传输的特性以及较低的端到端时延在移动直播中得到了广泛的应用。现有流媒体直播研究侧重于对直播系统架构和用户直播行为规律性的研究，关于优化视频直播传输质量的研究较为稀少。随着移动直播用户量的爆炸式增长，优化直播传输的质量迫在眉睫。
+移动设备的大量普及以及通信技术的发展让用户不再满足于单纯的观看视频直播，用户逐渐成为直播内容的贡献者。传统的流媒体直播技术，不能有效地应对无线网络的带宽抖动，也不能满足交互直播端到端时延短以及高交互的性能要求。现有的研究侧重于对直播系统架构和用户直播行为规律性的研究，优化直播传输质量的研究较为稀少。%另外，主播端的用户服务质量在直播服务中起着至关重要的作用，主播端发生的任何延迟和失败都会对所有观看用户产生影响。
+随着移动直播用户量的爆炸式增长，优化直播传输的质量至关重要。
 
-主播端的用户服务质量在交互直播服务中起着至关重要的作用，主播端上传过程中发生的任何延迟和失败都会对所有观看用户产生影响。本文通过测量多个流行商业直播平台的主播端，发现当无线网络的带宽发生抖动时，所有平台的主播端都会观测到长时间的丢帧现象，严重损害了观众的用户体验质量。
+首先，本文通过对斗鱼和Twitch等商业直播平台主播端性能的测量，发现当无线网络的带宽发生抖动时，所有平台的主播端都会观测到较长时间的丢帧现象，严重损害了观众的用户体验质量。为了找出丢帧产生的原因，本文通过分析开源直播软件的源码，发现丢帧效应产生的主要原因有两点，视频编码机制带来的帧间依赖问题，以及网络质量不佳时视频数据产生速率高于网络可用容量。现有的视频编码方案都工作在差别编码模式，一个图片组后面的帧只有依赖于前面的帧才能正常解码，因此短时间的带宽抖动会在应用层产生丢帧放大效应。另外，对于长时间的带宽波动，目前的商业直播平台无法工作在变码率模式下，恒定的视频产生速度显然无法适应复杂的移动网络。
 
-通过分析开源直播软件的源码发现，丢帧效应产生的主要原因有两点，视频编码带来的帧间依赖问题，以及网络状况不好时视频数据产生速率高于网络容量。为了减少丢帧现象的发生，本文从关键帧间隔，视频帧的丢帧策略和码率选择三个角度分别着手。网络带宽已知条件下最大化数据传输量的模型，从最优化的角度给出了离线最优的丢帧策略，保证了视频帧的解码约束以及带宽容量约束。码率选择方面，本文尝试固定丢帧策略，综合考虑实时码率以及码率切换，丢帧带来的质量损失，去最大化用户体验质量的收益。
+随后，为了减少丢帧现象的发生，本文协同设计了一整套的解决方案：(1) 最优的关键帧间隔选择策略； (2) 简单且有效的智能丢帧策略 GreedyDrop；(3) GoP粒度的码率自适应策略GVBR。关键帧间隔在选择时需要综合考虑视频帧间的依赖关系以及视频压缩比，在丢帧效应和视频质量之间寻求一个平衡点。为了最大化数据有效传输量，当视频帧队列溢出时，GreedyDrop 选择性的丢弃旧的图片组；GreedyDrop 不仅保证了视频帧的解码约束以及带宽容量约束，还缓解了商业直播平台的丢帧现象。GVBR算法综合考虑了实时码率收益，码率切换损失，以及丢帧带来的质量损失，基于带宽估计值和视频队列数据量之间的差值来选择合适的码率，通过调节系数为队列缓存小的主播端定制化策略。
 
-为了优化主播端的用户体验质量，我们协同上述三个策略设计了一整套的解决方案：(1) 最优的关键帧间隔选择策略。关键帧间隔选择时综合考虑视频帧间的依赖关系以及视频压缩比，在丢帧效应和视频质量之间寻求一个平衡点；
-(2) 简单且有效的智能丢帧策略。当视频帧队列溢出时选择性的丢弃旧的GoP，用来缓解商业直播平台应用层丢帧的放大效应；
-(3) GoP粒度的码率自适应策略。基于带宽估计值和视频队列数据量之间的差值来选择合适的码率，通过调节系数为队列缓存小的主播端定制化策略。
-
-本文选取了三个点播领域最新的码率自适应算法作为对比算法，在LTE和Wifi网络环境下分别进行了仿真。实验结果表明，本文提出的解决方案在维持相同码率的条件下，大幅度减少了用户的上传失败问题。
+最后，为了验证解决方案的有效性，本文选取了三个最新的码率自适应算法作为对比算法，在LTE和Wifi网络环境下分别进行了仿真。实验结果表明，本文提出的解决方案在维持相同码率的基础上，大幅度缓解了主播端的丢帧现象，减少了用户上传失败的发生。
 \end{cabstract}
 
 % 如果习惯关键字跟在摘要文字后面，可以用直接命令来设置，如下：
 % \ckeywords{\TeX, \LaTeX, CJK, 模板, 论文}
 
 \begin{eabstract}
-With the popularization of mobile devices and the rapid development of communication technologies, instead of simply watching live video, users more and more participate in contributing the live streaming. Traditional streaming technology cannot effectively cope with the bandwidth jitter of the wireless network, nor can it meet the requirements of low-latency and high interactive live streaming. Due to the low end-to-end delay, RTMP is widely used in mobile live streaming. Recent researches focus on the system architecture of live streaming and the pattern of users' behavior, studies on optimizing the QoE of live video transmission is rare to find. With a huge number of users, optimizing the QoE of live video is imminent.
+With the popularization of mobile devices and the rapid development of communication technologies, instead of simply watching live video, users more and more participate in contributing the live streaming. Traditional streaming technology cannot effectively cope with the bandwidth jitter of the wireless network, nor can it meet the requirements of low-latency and high interactive live streaming. %Due to the low end-to-end delay, RTMP is widely used in mobile live streaming.
+Recent researches focus on the system architecture of live streaming and the pattern of users' behavior, studies on optimizing the QoE of live video transmission is rare to find. %However, ensuring high video quality of experience (QoE) on the
+%broadcaster side is critical for interactive live streaming
+%services, because any delay on the broadcaster side can cause
+%negative impact on all viewers.
+With a huge number of users, optimizing the QoE of live video is imminent.
 
-Ensuring high video quality of experience (QoE) on the
-broadcaster side is critical for interactive live streaming
-services, because any delay on the broadcaster side can cause
-negative impact on all viewers. Through measurements on
-multiple popular live video streaming platforms, we find that
+Through measurements on
+multiple popular live video streaming platforms, e.g., Twitch, Douyu and so on, we find that
 they all suffer from broadcaster-side video quality degradation
 caused by unnecessarily persistent video interruptions
-in the presence of transient bandwidth fluctuations. 
-
-Analyzing the source code of the open source live broadcast software, there are two main reasons for the frame dropping issue, the inter-frame dependency caused by video encoding, and that the video data generation rate is higher than the network capacity when the network is in bad condition. In order to reduce the frame dropping, this paper tries three aspects: key frame interval, frame dropping strategy and video bitrate selection. Assume known the network bandwidth, we try ro maximize the transmitted data under the constraints of frame decodable and the bandwidth capacity, which provides an offline optimal frame dropping strategy. As for the video bitrate, we take the bitrate, rate switch penalty and frame dropping into consideration, use the known frame dropping strategy to maximize the QoE utility.
+in the presence of transient bandwidth fluctuations. Analyzing the source code of the open source live broadcast software, there are two main reasons for the frame dropping issue, the inter-frame dependency caused by video encoding, and that the video data generation rate is higher than the network capacity when the network is in bad condition. Existing encoding technologies work in delta encoding mode, where the decodability of later frames depend on the former frames in the groups of pictures. Thus a transient bandwidth drop would introduce a long-term frame drops in application level. Besides, for the long-term bandwidth fluctuation, the-state-of-art live streaming platforms cannot change their bitrate. Constant video data generation rate definitely cannot adapt to variable wireless network.
+%In order to reduce the frame dropping, this paper tries three aspects: key frame interval, frame dropping strategy and video bitrate selection. Assume known the network bandwidth, we try ro maximize the transmitted data under the constraints of frame decodable and the bandwidth capacity, which provides an offline optimal frame dropping strategy. As for the video bitrate, we take the bitrate, rate switch penalty and frame dropping into consideration, use the known frame dropping strategy to maximize the QoE utility.
 
 This paper takes a holistic stance, and presents a suite of
 solutions that optimizes the broadcaster-side QoE through (1)
-a keyframe placement strategy that dynamically trades crossframe
-compression for lowered inter-frame interdependency,
-(2) a simple-yet-efficient frame dropping strategy to prevent
+a keyframe placement strategy,
+(2) a simple-yet-efficient frame dropping strategy GreedyDrop, and (3) finally, a RTMP-based bitrate adaptation
+strategy GVBR.
+An appropriate keyframe interval can dynamically trade crossframe
+compression for lowered inter-frame interdependency. While GreedyDrop is designed to prevent
 excessive frame drops observed in many popular streaming
-platforms, and (3) finally, a RTMP-based bitrate adaptation
-strategy customized for video broadcasters who have extremely
-shallow buffer (below one second). We compare our solution with several state-of-the-art video adaptation algorithms in a variety of network conditions, and find
+platforms under the constraints of frame decodability and the bandwidth capacity. GVBR is customized for video broadcasters who have extremely
+shallow buffer (below one second). GVBR take the bitrate, rate switch penalty and frame dropping into consideration. We compare our solution with several state-of-the-art video adaptation algorithms in a variety of network conditions, and find
 that our solution can substantially reduce the frame drops, while achieving comparable
 bitrate.
 \end{eabstract}

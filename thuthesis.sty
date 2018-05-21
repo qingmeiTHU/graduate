@@ -34,6 +34,10 @@
 \def\cmd@to@cs#1#2{\char\number`#2\relax}
 \DeclareRobustCommand\cs[1]{\texttt{\char`\\#1}}
 
+\makeatletter
+\renewcommand\@biblabel[1]{[#1]\hfill}
+\makeatother
+
 \newcommand*{\meta}[1]{{%
   \ensuremath{\langle}\rmfamily\itshape#1\/\ensuremath{\rangle}}}
 \providecommand\marg[1]{%
@@ -48,3 +52,4 @@
 \newcommand{\china}{中华人民共和国}
 
 \endinput
+

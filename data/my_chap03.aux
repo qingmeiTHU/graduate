@@ -1,0 +1,137 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\FN@pp@footnotehinttrue 
+\@writefile{toc}{\contentsline {chapter}{\numberline {第3章}主播端的视频质量问题}{15}{chapter.3}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}直播系统架构}{15}{section.3.1}}
+\citation{OBS}
+\citation{dummynet}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces 交互直播系统架构\relax }}{16}{figure.caption.14}}
+\newlabel{fig:architecture}{{3.1}{16}{交互直播系统架构\relax }{figure.caption.14}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}主播端性能测量}{16}{section.3.2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces 实验设置\relax }}{17}{figure.caption.15}}
+\newlabel{fig:setup}{{3.2}{17}{实验设置\relax }{figure.caption.15}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}案例分析：带宽抖动导致传输质量差}{17}{subsection.3.2.1}}
+\citation{FCC}
+\citation{riiser2013commute}
+\newlabel{fig:case_study_a}{{3.3(a)}{18}{0-140s的吞吐量\relax }{figure.caption.16}{}}
+\newlabel{sub@fig:case_study_a}{{(a)}{18}{0-140s的吞吐量\relax }{figure.caption.16}{}}
+\newlabel{fig:case_study_b}{{3.3(b)}{18}{120-260s的吞吐量\relax }{figure.caption.16}{}}
+\newlabel{sub@fig:case_study_b}{{(b)}{18}{120-260s的吞吐量\relax }{figure.caption.16}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces 无线网络环境下直播应用的吞吐量\relax }}{18}{figure.caption.16}}
+\newlabel{fig:case_study}{{3.3}{18}{无线网络环境下直播应用的吞吐量\relax }{figure.caption.16}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}带宽抖动的普遍性}{18}{subsection.3.2.2}}
+\newlabel{fig:trace}{{3.4(a)}{18}{归一化带宽累计分布函数\relax }{figure.caption.17}{}}
+\newlabel{sub@fig:trace}{{(a)}{18}{归一化带宽累计分布函数\relax }{figure.caption.17}{}}
+\newlabel{fig:trace_down}{{3.4(b)}{18}{带宽抖动时长分布\relax }{figure.caption.17}{}}
+\newlabel{sub@fig:trace_down}{{(b)}{18}{带宽抖动时长分布\relax }{figure.caption.17}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces 无线网络环境的带宽分布\relax }}{18}{figure.caption.17}}
+\newlabel{fig:trace_distribution}{{3.4}{18}{无线网络环境的带宽分布\relax }{figure.caption.17}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.3}商业平台验证}{19}{subsection.3.2.3}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.1}{\ignorespaces 不同实验配置下的丢帧数\relax }}{19}{table.caption.19}}
+\newlabel{tb:drop}{{3.1}{19}{不同实验配置下的丢帧数\relax }{table.caption.19}{}}
+\newlabel{fig:obs_douyu}{{3.5(a)}{20}{OBS推流至斗鱼服务器的吞吐量和丢帧\relax }{figure.caption.18}{}}
+\newlabel{sub@fig:obs_douyu}{{(a)}{20}{OBS推流至斗鱼服务器的吞吐量和丢帧\relax }{figure.caption.18}{}}
+\newlabel{fig:douyu}{{3.5(b)}{20}{斗鱼主播工具推流至斗鱼服务器的吞吐量和丢帧\relax }{figure.caption.18}{}}
+\newlabel{sub@fig:douyu}{{(b)}{20}{斗鱼主播工具推流至斗鱼服务器的吞吐量和丢帧\relax }{figure.caption.18}{}}
+\newlabel{fig:twitch}{{3.5(c)}{20}{OBS推流至Twitch服务器的吞吐量和丢帧\relax }{figure.caption.18}{}}
+\newlabel{sub@fig:twitch}{{(c)}{20}{OBS推流至Twitch服务器的吞吐量和丢帧\relax }{figure.caption.18}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces 商业平台验证实验\relax }}{20}{figure.caption.18}}
+\newlabel{fig:commerical_application}{{3.5}{20}{商业平台验证实验\relax }{figure.caption.18}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces 长时间带宽抖动状况下的吞吐量\relax }}{21}{figure.caption.20}}
+\newlabel{fig:vary-bandwidth}{{3.6}{21}{长时间带宽抖动状况下的吞吐量\relax }{figure.caption.20}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}本质原因追溯}{22}{section.3.3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.7}{\ignorespaces 视频帧队列示意图\relax }}{22}{figure.caption.21}}
+\newlabel{fig:drop}{{3.7}{22}{视频帧队列示意图\relax }{figure.caption.21}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.8}{\ignorespaces H.264帧的编码顺序和播放顺序\relax }}{22}{figure.caption.22}}
+\newlabel{fig:frame-order}{{3.8}{22}{H.264帧的编码顺序和播放顺序\relax }{figure.caption.22}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces OBS默认丢帧算法\relax }}{23}{algorithm.1}}
+\newlabel{alg:obs-drop}{{1}{23}{OBS默认丢帧算法\relax }{algorithm.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.4}本章小结}{24}{section.3.4}}
+\FN@pp@footnotehinttrue 
+\@setckpt{data/my_chap03}{
+\setcounter{page}{26}
+\setcounter{equation}{0}
+\setcounter{enumi}{2}
+\setcounter{enumii}{0}
+\setcounter{enumiii}{0}
+\setcounter{enumiv}{0}
+\setcounter{footnote}{0}
+\setcounter{mpfootnote}{0}
+\setcounter{part}{0}
+\setcounter{chapter}{3}
+\setcounter{section}{4}
+\setcounter{subsection}{0}
+\setcounter{subsubsection}{0}
+\setcounter{paragraph}{0}
+\setcounter{subparagraph}{0}
+\setcounter{figure}{8}
+\setcounter{table}{1}
+\setcounter{parentequation}{0}
+\setcounter{ContinuedFloat}{0}
+\setcounter{subfigure}{0}
+\setcounter{subtable}{0}
+\setcounter{AM@survey}{0}
+\setcounter{pp@next@reset}{1}
+\setcounter{@fnserial}{0}
+\setcounter{endNonectr}{10}
+\setcounter{currNonectr}{0}
+\setcounter{LT@tables}{0}
+\setcounter{LT@chunks}{0}
+\setcounter{NAT@ctr}{0}
+\setcounter{Item}{4}
+\setcounter{Hfootnote}{0}
+\setcounter{bookmark@seq@number}{24}
+\setcounter{thu@bookmark}{4}
+\setcounter{translationbibi}{0}
+\setcounter{publicationsi}{0}
+\setcounter{achievementsi}{0}
+\setcounter{currproofctr}{0}
+\setcounter{endproofctr}{0}
+\setcounter{proof}{0}
+\setcounter{currassumptionctr}{0}
+\setcounter{endassumptionctr}{0}
+\setcounter{assumption}{0}
+\setcounter{currdefinitionctr}{0}
+\setcounter{enddefinitionctr}{0}
+\setcounter{definition}{0}
+\setcounter{currpropositionctr}{0}
+\setcounter{endpropositionctr}{0}
+\setcounter{proposition}{0}
+\setcounter{currlemmactr}{0}
+\setcounter{endlemmactr}{0}
+\setcounter{lemma}{0}
+\setcounter{currtheoremctr}{0}
+\setcounter{endtheoremctr}{0}
+\setcounter{theorem}{0}
+\setcounter{curraxiomctr}{0}
+\setcounter{endaxiomctr}{0}
+\setcounter{axiom}{0}
+\setcounter{currcorollaryctr}{0}
+\setcounter{endcorollaryctr}{0}
+\setcounter{corollary}{0}
+\setcounter{currexercisectr}{0}
+\setcounter{endexercisectr}{0}
+\setcounter{exercise}{0}
+\setcounter{currexamplectr}{0}
+\setcounter{endexamplectr}{0}
+\setcounter{example}{0}
+\setcounter{currremarkctr}{0}
+\setcounter{endremarkctr}{0}
+\setcounter{remark}{0}
+\setcounter{currproblemctr}{0}
+\setcounter{endproblemctr}{0}
+\setcounter{problem}{0}
+\setcounter{currconjecturectr}{0}
+\setcounter{endconjecturectr}{0}
+\setcounter{conjecture}{0}
+\setcounter{float@type}{8}
+\setcounter{ALG@line}{20}
+\setcounter{ALG@rem}{0}
+\setcounter{ALG@nested}{0}
+\setcounter{ALG@Lnr}{2}
+\setcounter{ALG@blocknr}{10}
+\setcounter{ALG@storecount}{0}
+\setcounter{ALG@tmpcounter}{0}
+\setcounter{algorithm}{1}
+\setcounter{section@level}{1}
+}
